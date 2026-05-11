@@ -20,11 +20,7 @@ internal static class RabbitMqInfrastructureExtensions
                 .WithLifetime(ContainerLifetime.Persistent)
                 .WithManagementPlugin(options.ManagementPort)
                 .WithBindMount(enabledPluginsPath, options.ContainerPluginsPath)
-                .WithAnnotation(new ContainerRuntimeArgsCallbackAnnotation(args =>
-                {
-                    args.Add($"{options.MemoryArg}={options.MemoryLimit}");
-                    args.Add($"{options.MemorySwapArg}={options.MemorySwap}");
-                }));
+                .WithMemoryLimits(options);
         }
     }
 

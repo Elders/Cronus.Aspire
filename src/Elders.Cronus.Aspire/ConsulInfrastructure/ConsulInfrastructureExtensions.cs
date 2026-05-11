@@ -24,11 +24,7 @@ internal static class ConsulInfrastructureExtensions
                     name: options.DnsEndpointName,
                     scheme: options.DnsScheme)
                 .WithArgs(options.Args)
-                .WithAnnotation(new ContainerRuntimeArgsCallbackAnnotation(args =>
-                {
-                    args.Add($"{options.MemoryArg}={options.MemoryLimit}");
-                    args.Add($"{options.MemorySwapArg}={options.MemorySwap}");
-                }));
+                .WithMemoryLimits(options);
         }
     }
 

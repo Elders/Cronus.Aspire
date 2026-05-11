@@ -24,9 +24,6 @@ internal static class CassandraContainerDefaults
     internal const string HeapNewSizeEnv = "HEAP_NEWSIZE";
     internal const string HeapNewSize = "512M";
 
-    internal const string MemoryArg = "--memory";
-    internal const string MemorySwapArg = "--memory-swap";
-
     internal const string MemoryLimit = "4g";
     internal const string MemorySwap = "4g";
 }

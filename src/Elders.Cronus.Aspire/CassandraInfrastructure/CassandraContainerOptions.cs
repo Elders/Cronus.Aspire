@@ -1,25 +1,22 @@
-﻿namespace Elders.Cronus.Aspire.CassandraInfrastructure;
+using Elders.Cronus.Aspire.Common;
+
+namespace Elders.Cronus.Aspire.CassandraInfrastructure;
 
 /// <summary>
 /// Represents configuration options for provisioning and configuring a Cassandra container
 /// within an Aspire distributed application.
 /// </summary>
-public sealed class CassandraContainerOptions
+public sealed class CassandraContainerOptions : ContainerImageOptions
 {
-    /// <summary>
-    /// Gets or sets the logical name of the Cassandra service within the distributed application.
-    /// </summary>
-    public string ServiceName { get; set; } = CassandraContainerDefaults.ServiceName;
-
-    /// <summary>
-    /// Gets or sets the container image used to run Cassandra.
-    /// </summary>
-    public string Image { get; set; } = CassandraContainerDefaults.Image;
-
-    /// <summary>
-    /// Gets or sets the image tag or version of the Cassandra container.
-    /// </summary>
-    public string Version { get; set; } = CassandraContainerDefaults.Version;
+    public CassandraContainerOptions()
+        : base(
+            CassandraContainerDefaults.ServiceName,
+            CassandraContainerDefaults.Image,
+            CassandraContainerDefaults.Version,
+            CassandraContainerDefaults.MemoryLimit,
+            CassandraContainerDefaults.MemorySwap)
+    {
+    }
 
     /// <summary>
     /// Gets or sets the port exposed by the Cassandra service.
@@ -81,24 +78,5 @@ public sealed class CassandraContainerOptions
     /// Gets or sets the size of the new generation heap for the Cassandra JVM.
     /// </summary>
     public string HeapNewSize { get; set; } = CassandraContainerDefaults.HeapNewSize;
-
-    /// <summary>
-    /// Gets or sets the argument name used to configure container memory limits.
-    /// </summary>
-    public string MemoryArg { get; set; } = CassandraContainerDefaults.MemoryArg;
-
-    /// <summary>
-    /// Gets or sets the argument name used to configure container memory swap limits.
-    /// </summary>
-    public string MemorySwapArg { get; set; } = CassandraContainerDefaults.MemorySwapArg;
-
-    /// <summary>
-    /// Gets or sets the memory limit applied to the Cassandra container.
-    /// </summary>
-    public string MemoryLimit { get; set; } = CassandraContainerDefaults.MemoryLimit;
-
-    /// <summary>
-    /// Gets or sets the memory swap limit applied to the Cassandra container.
-    /// </summary>
-    public string MemorySwap { get; set; } = CassandraContainerDefaults.MemorySwap;
 }
+

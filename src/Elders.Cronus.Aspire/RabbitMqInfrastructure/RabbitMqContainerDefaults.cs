@@ -12,9 +12,6 @@ internal static class RabbitMqContainerDefaults
 
     internal const int ManagementPort = 15672;
 
-    internal const string MemoryArg = "--memory";
-    internal const string MemorySwapArg = "--memory-swap";
-
     internal const string MemoryLimit = "1g";
     internal const string MemorySwap = "1g";
 }

@@ -21,9 +21,6 @@ internal static class ConsulContainerDefaults
         "-client=0.0.0.0"
     };
 
-    internal const string MemoryArg = "--memory";
-    internal const string MemorySwapArg = "--memory-swap";
-
     internal const string MemoryLimit = "512m";
     internal const string MemorySwap = "512m";
 }

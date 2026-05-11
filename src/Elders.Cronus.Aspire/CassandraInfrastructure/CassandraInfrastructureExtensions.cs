@@ -39,11 +39,7 @@ internal static class CassandraInfrastructureExtensions
                 .WithEnvironment(options.SnitchEnv, options.Snitch)
                 .WithEnvironment(options.MaxHeapEnv, options.MaxHeap)
                 .WithEnvironment(options.HeapNewSizeEnv, options.HeapNewSize)
-                .WithAnnotation(new ContainerRuntimeArgsCallbackAnnotation(args =>
-                {
-                    args.Add($"{options.MemoryArg}={options.MemoryLimit}");
-                    args.Add($"{options.MemorySwapArg}={options.MemorySwap}");
-                }));
+                .WithMemoryLimits(options);
         }
     }
 }

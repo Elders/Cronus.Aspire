@@ -14,11 +14,7 @@ internal static class RedisInfrastructureExtensions
 
             return builder.AddRedis(options.ServiceName)
                 .WithLifetime(ContainerLifetime.Persistent)
-                .WithAnnotation(new ContainerRuntimeArgsCallbackAnnotation(args =>
-                {
-                    args.Add($"{options.MemoryArg}={options.MemoryLimit}");
-                    args.Add($"{options.MemorySwapArg}={options.MemorySwap}");
-                }));
+                .WithMemoryLimits(options);
         }
     }
 

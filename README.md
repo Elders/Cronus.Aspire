@@ -1,2 +1,5 @@
 # Cronus.Aspire
-Extension package, that allow you to use the Cronus Framework inside a project with Aspire infrastructure.
+
+Cronus.Aspire is an extension package for wiring Cronus Framework applications into .NET Aspire.
+It registers the infrastructure services Cronus commonly needs, including Cassandra, RabbitMQ,
+Redis, and Consul, and exposes helpers for referencing those services from Aspire project resources.
