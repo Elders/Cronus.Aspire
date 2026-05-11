@@ -1,7 +1,9 @@
 ---
-
 variables:
-  PROJECT_DIR: Elders.Cronus.Aspire
+  - group: elders-nuget
+  - name: PROJECT_DIR
+    value: Elders.Cronus.Api
+
 trigger:
   branches:
     include: [master,beta,preview]
