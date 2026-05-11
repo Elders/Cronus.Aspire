@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting" Version="13.2.4" />
-    <PackageReference Include="Aspire.Hosting.Redis" Version="13.2.4" />
-    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="13.2.4" />
+    <PackageReference Include="Aspire.Hosting" Version="13.3.0" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="13.3.0" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="13.3.0" />
   </ItemGroup>
 
   <!--Nuget-->
