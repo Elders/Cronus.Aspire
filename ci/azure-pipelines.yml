@@ -3,8 +3,6 @@ variables:
   - group: elders-nuget
   - name: PROJECT_DIR
     value: Elders.Cronus.Aspire
-  - name: INITIAL_VERSION
-    value: 12.0.0
 
 trigger:
   branches:
@@ -42,36 +40,8 @@ stages:
         projects: 'src/$(PROJECT_DIR)/*.csproj'
 
     - task: Bash@3
-      name: initial_release
-      displayName: initial v12 package bootstrap
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
-      env:
-        STAGING_PATH: $(Build.StagingDirectory)
-      inputs:
-        targetType: 'inline'
-        script: |
-          set -e
-
-          INITIAL_TAG="v$(INITIAL_VERSION)"
-
-          if git rev-parse "$INITIAL_TAG" >/dev/null 2>&1; then
-            echo "Initial release tag $INITIAL_TAG already exists. Skipping bootstrap."
-            echo "##vso[task.setvariable variable=skipSemanticRelease;]no"
-            exit 0
-          fi
-
-          dotnet pack "src/$(PROJECT_DIR)/"*.csproj -o "$STAGING_PATH" -p:Configuration=Release -p:PackageVersion=$(INITIAL_VERSION) --verbosity Detailed
-          git tag "$INITIAL_TAG"
-
-          echo "##vso[build.updatebuildnumber]$(INITIAL_VERSION)"
-          echo "##vso[task.setvariable variable=initialRelease;]yes"
-          echo "##vso[task.setvariable variable=newVer;]yes"
-          echo "##vso[task.setvariable variable=skipSemanticRelease;]yes"
-
-    - task: Bash@3
       name: release
       displayName: semantic release + pack
-      condition: ne(variables['skipSemanticRelease'], 'yes')
       env:
         STAGING_PATH: $(Build.StagingDirectory)
       inputs:
@@ -93,11 +63,3 @@ stages:
       inputs:
         targetType: 'inline'
         script: 'dotnet nuget push $(Build.StagingDirectory)/*.nupkg --api-key $(NUGET_KEY) --source https://api.nuget.org/v3/index.json --skip-duplicate'
-
-    - task: Bash@3
-      name: push_initial_tag
-      displayName: push initial release tag
-      condition: and(eq(variables['initialRelease'], 'yes'), succeeded())
-      inputs:
-        targetType: 'inline'
-        script: 'git push origin v$(INITIAL_VERSION)'
