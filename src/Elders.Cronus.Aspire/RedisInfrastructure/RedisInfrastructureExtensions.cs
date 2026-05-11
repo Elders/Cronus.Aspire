@@ -6,8 +6,6 @@ namespace Elders.Cronus.Aspire.RedisInfrastructure;
 
 internal static class RedisInfrastructureExtensions
 {
-    private const string ConnectionStringValueExpression = "{ConnectionStrings:redis}";
-
     extension(IDistributedApplicationBuilder builder)
     {
         internal IResourceBuilder<RedisResource> AddRedis(RedisContainerOptions? options)
@@ -30,7 +28,7 @@ internal static class RedisInfrastructureExtensions
         {
             return project
                 .WithReference(redis)
-                .WithEnvironment(CronusConfigurationKeys.AtomicActionsKey, ConnectionStringValueExpression);
+                .WithEnvironment(CronusConfigurationKeys.AtomicActionsKey, redis.Resource.ConnectionStringExpression);
         }
     }
 }
